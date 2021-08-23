@@ -12,22 +12,28 @@ env:
 jobs:
   build:
 
+    // Add to the matrix.os any additional os I want to build for.
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Build
       run: cargo build --verbose
-      
+
     - name: Run tests
       run: cargo test --verbose
-      
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.6
+      with:
+        args: >
+          -Dsonar.organization=${{ secrets.SONAR_ORG}}
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY}}
+
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
