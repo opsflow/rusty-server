@@ -6,6 +6,7 @@ pub struct WebsiteHandler {
     public_path: String,
 }
 
+/// Handler implementation to route traffic and serve html.
 impl WebsiteHandler {
     pub fn new(public_path: String) -> Self {
         Self { public_path }

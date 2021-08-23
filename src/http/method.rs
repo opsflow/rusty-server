@@ -1,5 +1,7 @@
 use std::str::FromStr;
 
+// Declare a Method type to handle the different HTTP request methods as variants.
+
 #[derive(Debug)]
 pub enum Method {
     CONNECT,
@@ -13,6 +15,8 @@ pub enum Method {
     TRACE,
 }
 
+// Implementing FromStr on the Method enums allows us to convert strings from the requests
+// to the corresponding variant.
 impl FromStr for Method {
     type Err = MethodError;
 
