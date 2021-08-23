@@ -6,6 +6,8 @@ use std::fmt::{Debug, Display, Formatter, Result as FmtResult};
 use std::str;
 use std::str::Utf8Error;
 
+// Define a public structure for Requests, specify timeline <'buff> so the compiler knows
+// how long the buffer needs to live.
 #[derive(Debug)]
 pub struct Request<'buff> {
     path: &'buff str,
@@ -24,6 +26,9 @@ impl<'buff> Request<'buff> {
         self.query_string.as_ref()
     }
 }
+
+// Parse and return our request from quesry string.
+// Only accepting HTTP/1.1 protocol.
 
 impl<'buff> TryFrom<&'buff [u8]> for Request<'buff> {
     type Error = ParseError;
@@ -56,6 +61,7 @@ impl<'buff> TryFrom<&'buff [u8]> for Request<'buff> {
     }
 }
 
+// Create and iterate over elements of the request.
 fn get_next_word(request: &str) -> Option<(&str, &str)> {
     for (i, c) in request.chars().enumerate() {
         if c == ' ' || c == '\r' {
@@ -66,6 +72,7 @@ fn get_next_word(request: &str) -> Option<(&str, &str)> {
     None
 }
 
+// Create ParseError type with appropriate errors.
 pub enum ParseError {
     InvalidRequest,
     InvalidEncoding,
@@ -73,6 +80,7 @@ pub enum ParseError {
     InvalidMethod,
 }
 
+// Parse error implementation.
 impl ParseError {
     fn message(&self) -> &str {
         match self {
@@ -84,6 +92,7 @@ impl ParseError {
     }
 }
 
+// Implement handy traits for ParseError
 impl From<MethodError> for ParseError {
     fn from(_: MethodError) -> Self {
         Self::InvalidMethod
@@ -110,6 +119,7 @@ impl Debug for ParseError {
 
 impl Error for ParseError {}
 
+// Define a new trait for encrypting strings and byte slices. UNIMPLEMENTED.
 trait Encrypt {
     fn encrypt(&self) -> Self;
 }

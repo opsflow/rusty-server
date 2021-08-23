@@ -11,6 +11,7 @@ pub trait Handler {
         Response::new(StatusCode::BadRequest, None)
     }
 }
+
 pub struct Server {
     address: String,
 }
@@ -20,15 +21,26 @@ impl Server {
         Self { address }
     }
 
+    /// Starts a server loop. We use our TcpListener to listen out on an address (Default is local
+    /// on port 8080, but is dynamic (with env variables)
     pub fn run(self, mut handler: impl Handler) {
         println!("Server listening on: {}", self.address);
 
+        // Create our listener, unwrap the requests that can be passed to it, and note it can fail.
         let listener = TcpListener::bind(self.address).unwrap();
 
         loop {
+            // First we match on the listener's ability to establish a connection. If it fails
+            // we'll return a Failed to Establish Connection error.
             match listener.accept() {
                 Ok((mut stream, _)) => {
+                    // Declare and initialize request buffer [0; n] n = bytes. Big enough
+                    // for our small sever, for now.
                     let mut buffer = [0; 1024];
+
+                    // To deal with bad requests, and the potential failure mentioned above,
+                    // we'll match on the buffer. If the buffer is Ok, we'll match
+                    // on the request and our handler will handle parsing our request.
                     match stream.read(&mut buffer) {
                         Ok(_) => {
                             println!("Received a request: {}", String::from_utf8_lossy(&buffer));
