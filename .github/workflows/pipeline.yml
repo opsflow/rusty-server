@@ -12,7 +12,7 @@ env:
 jobs:
   build:
 
-    // Add to the matrix.os any additional os I want to build for.
+    # Add to the matrix.os any additional os I want to build for.
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
