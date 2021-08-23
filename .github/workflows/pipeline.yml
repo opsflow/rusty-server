@@ -27,9 +27,7 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-    // Note that SonarCloud currently doesn't support Rust language Analysis
-    // The Rust Compiler does all we need for, but will be useful if I decide
-    // to turn this into a real website with a proper front end.
+     # Note that SonarCloud currently doesn't support Rust language Analysis
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.6
