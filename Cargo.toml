@@ -2,7 +2,6 @@
 name = "rusty_server"
 version = "0.1.0"
 edition = "2018"
-authors = "Anthony M. Jarvis / @iamjarvi"
 description = "A quick and rusty HTTP server."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
