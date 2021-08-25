@@ -17,7 +17,10 @@ fn main() {
     let public_path = env::var("PUBLIC_PATH").unwrap_or(default_path);
     println!("Public Path: {}", public_path);
 
-    // Server Address. From string literal to String.
+    // Server Address. From string literal to String. If there's no environment Variable
+    // to unwrap, it will provide the default.
+    // IF DOCKERIZED: In your Dockerfile, add: "ENV SERVER_ADDRESS = "0.0.0.0:8080" To save
+    // you a container networking headache.
     let addr_string = env::var("SERVER_ADDRESS").unwrap_or("127.0.0.1:8080".to_string());
     println!("Public Path: {}", addr_string);
 
