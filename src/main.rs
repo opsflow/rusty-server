@@ -8,9 +8,9 @@ mod server;
 mod website_handler;
 
 fn main() {
+    
     // Set Default Path to Public in an environment variable, using env macro and Cargo's
     // metadata
-
     let default_path = format!("{}/public", env!("CARGO_MANIFEST_DIR"));
 
     // Environment Variables for Public Path to serve HTML files

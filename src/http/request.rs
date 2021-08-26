@@ -6,15 +6,15 @@ use std::fmt::{Debug, Display, Formatter, Result as FmtResult};
 use std::str;
 use std::str::Utf8Error;
 
-// Define a public structure for Requests, specify timeline <'buff> so the compiler knows
-// how long the buffer needs to live.
+/// Define a public structure for Requests, specify timeline <'buff> so the compiler knows
+/// how long the buffer needs to live.
 #[derive(Debug)]
 pub struct Request<'buff> {
     path: &'buff str,
     query_string: Option<QueryString<'buff>>,
     method: Method,
 }
-// Getter
+/// Getter
 impl<'buff> Request<'buff> {
     pub fn path(&self) -> &str {
         &self.path
@@ -27,8 +27,8 @@ impl<'buff> Request<'buff> {
     }
 }
 
-// Parse and return our request from quesry string.
-// Only accepting HTTP/1.1 protocol.
+/// Parse and return our request from query string.
+/// Only accepting HTTP/1.1 protocol.
 
 impl<'buff> TryFrom<&'buff [u8]> for Request<'buff> {
     type Error = ParseError;
@@ -61,7 +61,7 @@ impl<'buff> TryFrom<&'buff [u8]> for Request<'buff> {
     }
 }
 
-// Create and iterate over elements of the request.
+/// Create and iterate over elements of the request.
 fn get_next_word(request: &str) -> Option<(&str, &str)> {
     for (i, c) in request.chars().enumerate() {
         if c == ' ' || c == '\r' {
