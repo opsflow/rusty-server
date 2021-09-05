@@ -9,7 +9,7 @@ RUN cargo install --path .
 FROM debian:buster-slim
 
 
-COPY --from=builder /usr/local/cargo/bin/unrep /usr/local/bin/unrep
+COPY --from=builder /usr/local/cargo/bin/rusty_server /usr/local/bin/rusty_server
 
 # RUN mkdir www; cd www; mkdir html
 
