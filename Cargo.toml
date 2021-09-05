@@ -1,5 +1,5 @@
 [package]
-name = "unrep"
+name = "rusty_server"
 version = "0.1.0"
 authors = ["Anthony M. Jarvis <iamjarvi@hotmail.com>"]
 edition = "2018"

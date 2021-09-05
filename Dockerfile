@@ -16,4 +16,4 @@ COPY --from=builder /usr/local/cargo/bin/unrep /usr/local/bin/unrep
 COPY --from=builder /app/public/ /app/public/
 ENV SERVER_ADDRESS="0.0.0.0:8080"
 
-CMD ["unrep"]
+CMD ["rusty_server"]

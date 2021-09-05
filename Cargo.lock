@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "unrep"
+name = "rusty_server"
 version = "0.1.0"
