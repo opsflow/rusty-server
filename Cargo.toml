@@ -3,7 +3,7 @@ name = "rusty_server"
 version = "0.1.0"
 authors = ["Anthony M. Jarvis <iamjarvi@hotmail.com>"]
 edition = "2018"
-description = "A rusty HTTP server."
+description = "HTTP Server."
 
 
 
